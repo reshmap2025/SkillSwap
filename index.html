@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>SkillSwap</h2>
+                <p>Time Credit Community</p>
+            </div>
+
+            <nav>
+                <a href="#dashboard" class="active">🏠 Dashboard</a>
+                <a href="#members">👥 Members</a>
+                <a href="#members-details">📋 Members Details</a>
+                <a href="#skill-offers">💡 Skill Offers</a>
+                <a href="#request-skill">📝 Request Skill</a>
+                <a href="#sessions">📅 Sessions</a>
+                <a href="#credits">💳 Credits</a>
+            </nav>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar" id="dashboard">
+
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, Reshma!</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-icon">
+                        R
+                    </div>
+
+                    <div>
+                        <strong>Reshma</strong>
+                        <small>Member</small>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <section class="cards">
+
+                <div class="card">
+                    <div class="card-icon">💳</div>
+
+                    <div>
+                        <h3>My Credits</h3>
+                        <h2>6.0</h2>
+                        <p>Available Time Credits</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💡</div>
+
+                    <div>
+                        <h3>Skill Offers</h3>
+                        <h2>2</h2>
+                        <p>Available Skills</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📅</div>
+
+                    <div>
+                        <h3>Sessions</h3>
+                        <h2>3</h2>
+                        <p>Completed Sessions</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">👥</div>
+
+                    <div>
+                        <h3>Members</h3>
+                        <h2>2</h2>
+                        <p>Community Members</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="content-box" id="skill-offers">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>My Skill Offers</h2>
+                        <p>Skills available in the community</p>
+                    </div>
+
+                    <button onclick="addSkill()">
+                        + Add Skill
+                    </button>
+
+                </div>
+
+                <div id="skill-list"></div>
+
+            </section>
+
+            <section class="content-box" id="request-skill">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Request a Skill</h2>
+                        <p>Request a learning session using your time credits</p>
+                    </div>
+
+                </div>
+
+                <div style="display: grid; gap: 15px; max-width: 500px;">
+
+                    <label>
+                        <strong>Select Requester</strong>
+                    </label>
+
+                    <select id="requester-id"
+                        style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;">
+                    </select>
+
+                    <label>
+                        <strong>Select Provider</strong>
+                    </label>
+
+                    <select id="provider-id"
+                        style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;">
+                    </select>
+
+                    <label>
+                        <strong>Select Skill</strong>
+                    </label>
+
+                    <select id="skill-offer-id"
+                        style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;">
+                    </select>
+
+                    <label>
+                        <strong>Requested Hours</strong>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="requested-hours"
+                        min="0.5"
+                        step="0.5"
+                        placeholder="Enter hours"
+                        style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;"
+                    >
+
+                    <button onclick="requestSkill()">
+                        Request Session
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section class="content-box" id="members">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Community Members</h2>
+                        <p>Members available in the SkillSwap community</p>
+                    </div>
+
+                </div>
+
+                <button onclick="addMember()">+ Add Member</button>
+
+                <div id="member-list"></div>
+
+            </section>
+
+            <!-- MEMBERS DETAILS -->
+
+            <section class="content-box" id="members-details">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Members Details</h2>
+                        <p>View member skills and credits</p>
+                    </div>
+
+                </div>
+
+                <button onclick="addMemberDetails()">+ Add Details</button>
+
+                <div id="members-details-list"></div>
+
+            </section>
+
+            <section class="content-box" id="sessions">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Recent Sessions</h2>
+                        <p>Your latest skill exchange sessions</p>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Session</th>
+                                <th>Skill</th>
+                                <th>Requested</th>
+                                <th>Delivered</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="session-list"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            <section class="content-box" id="credits">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Credit Activity</h2>
+                        <p>Recent time-credit transactions</p>
+                    </div>
+
+                </div>
+
+                <div class="activity" id="credit-list"></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+
+        function addSkill() {
+
+            let skillName = prompt("Enter skill name:");
+
+            if (skillName === null || skillName.trim() === "") {
+                return;
+            }
+
+            let description = prompt("Enter skill description:");
+
+            if (description === null || description.trim() === "") {
+                return;
+            }
+
+            let hours = prompt("Enter available hours:");
+
+            if (hours === null || hours.trim() === "") {
+                return;
+            }
+
+            if (isNaN(hours) || parseFloat(hours) <= 0) {
+
+                alert("Please enter valid hours.");
+
+                return;
+            }
+
+            const skill = {
+
+                providerId: 2,
+
+                skillName: skillName,
+
+                description: description,
+
+                availableHours: parseFloat(hours)
+
+            };
+
+            fetch("http://localhost:8080/api/skill-offers", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(skill)
+
+            })
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Failed to add skill");
+                }
+
+                return response.json();
+
+            })
+
+            .then(() => {
+
+                alert("Skill added successfully!");
+
+                location.reload();
+
+            })
+
+            .catch(error => {
+
+                console.error("Error adding skill:", error);
+
+                alert("Failed to add skill.");
+
+            });
+
+        }
+
+        function viewSkill(skillName, description, hours) {
+
+            alert(
+                "Skill: " + skillName +
+                "\n\nDescription: " + description +
+                "\n\nAvailable Hours: " + hours
+            );
+
+        }
+
+        let allMembers = [];
+        let allSkills = [];
+
+        fetch("http://localhost:8080/api/members")
+            .then(response => response.json())
+            .then(data => {
+
+                allMembers = data;
+
+                const requesterSelect =
+                    document.getElementById("requester-id");
+
+                const providerSelect =
+                    document.getElementById("provider-id");
+
+                requesterSelect.innerHTML = "";
+                providerSelect.innerHTML = "";
+
+                data.forEach(member => {
+
+                    const requesterOption =
+                        document.createElement("option");
+
+                    requesterOption.value = member.id;
+
+                    requesterOption.textContent =
+                        member.name + " - " +
+                        member.creditBalance + " credits";
+
+                    requesterSelect.appendChild(requesterOption);
+
+                    const providerOption =
+                        document.createElement("option");
+
+                    providerOption.value = member.id;
+
+                    providerOption.textContent =
+                        member.name;
+
+                    providerSelect.appendChild(providerOption);
+
+                });
+
+                loadSkills();
+
+            });
+
+        function loadSkills() {
+
+            fetch("http://localhost:8080/api/skill-offers")
+                .then(response => response.json())
+                .then(data => {
+
+                    allSkills = data;
+
+                    updateSkillList();
+
+                });
+
+        }
+
+        /*
+         * CHANGED:
+         * All skills are now shown in the skill dropdown.
+         * Provider is still selected separately.
+         */
+
+        function updateSkillList() {
+
+            const skillSelect =
+                document.getElementById("skill-offer-id");
+
+            skillSelect.innerHTML = "";
+
+            const availableSkills =
+                allSkills.filter(
+                    skill =>
+                        skill.availableHours > 0
+                );
+
+            availableSkills.forEach(skill => {
+
+                const provider =
+                    allMembers.find(
+                        member =>
+                            Number(member.id) === Number(skill.providerId)
+                    );
+
+                const option =
+                    document.createElement("option");
+
+                option.value = skill.id;
+
+                option.textContent =
+                    skill.skillName +
+                    " - " +
+                    (provider ? provider.name : "Unknown Provider") +
+                    " - " +
+                    skill.availableHours +
+                    " hours available";
+
+                option.dataset.providerId = skill.providerId;
+
+                skillSelect.appendChild(option);
+
+            });
+
+            if (availableSkills.length === 0) {
+
+                const option =
+                    document.createElement("option");
+
+                option.textContent =
+                    "No skills available";
+
+                option.value = "";
+
+                skillSelect.appendChild(option);
+
+            }
+
+        }
+
+        /*
+         * When a skill is selected,
+         * automatically select its provider.
+         */
+
+        document
+            .getElementById("skill-offer-id")
+            .addEventListener("change", function () {
+
+                const selectedSkillId = this.value;
+
+                const selectedSkill =
+                    allSkills.find(
+                        skill =>
+                            Number(skill.id) === Number(selectedSkillId)
+                    );
+
+                if (selectedSkill) {
+
+                    document.getElementById("provider-id").value =
+                        selectedSkill.providerId;
+
+                }
+
+            });
+
+        function requestSkill() {
+
+            const requesterId =
+                document.getElementById("requester-id").value;
+
+            const providerId =
+                document.getElementById("provider-id").value;
+
+            const skillOfferId =
+                document.getElementById("skill-offer-id").value;
+
+            const requestedHours =
+                document.getElementById("requested-hours").value;
+
+            if (!requestedHours || requestedHours <= 0) {
+
+                alert("Please enter valid requested hours.");
+
+                return;
+            }
+
+            if (!skillOfferId) {
+
+                alert("Please select a skill.");
+
+                return;
+            }
+
+            if (requesterId === providerId) {
+
+                alert("Requester and Provider cannot be the same person.");
+
+                return;
+            }
+
+            const selectedSkill =
+                allSkills.find(
+                    skill =>
+                        Number(skill.id) === Number(skillOfferId)
+                );
+
+            if (!selectedSkill) {
+
+                alert("Skill not found.");
+
+                return;
+            }
+
+            /*
+             * Provider is automatically taken
+             * from the selected skill.
+             */
+
+            const actualProviderId =
+                selectedSkill.providerId;
+
+            if (Number(actualProviderId) !== Number(providerId)) {
+
+                alert("Selected skill does not belong to this provider.");
+
+                return;
+            }
+
+            const request = {
+
+                requesterId: parseInt(requesterId),
+
+                skillOfferId: parseInt(skillOfferId),
+
+                requestedHours: parseFloat(requestedHours)
+
+            };
+
+            fetch("http://localhost:8080/api/session-requests", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(request)
+
+            })
+
+            .then(async response => {
+
+                const data = await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error || "Request failed"
+                    );
+
+                }
+
+                return data;
+
+            })
+
+            .then(data => {
+
+                const requester =
+                    allMembers.find(
+                        member =>
+                            Number(member.id) === Number(requesterId)
+                    );
+
+                const provider =
+                    allMembers.find(
+                        member =>
+                            Number(member.id) === Number(providerId)
+                    );
+
+                alert(
+                    "Session request created successfully!\n\n" +
+                    "Requester: " +
+                    (requester ? requester.name : "") +
+                    "\nProvider: " +
+                    (provider ? provider.name : "") +
+                    "\nSkill: " +
+                    selectedSkill.skillName +
+                    "\nRequested Hours: " +
+                    data.requestedHours
+                );
+
+                location.reload();
+
+            })
+
+            .catch(error => {
+
+                alert(error.message);
+
+            });
+
+        }
+
+    </script>
+
+    <!-- MEMBERS DETAILS SCRIPT -->
+
+    <script>
+
+        function loadMembersDetails() {
+
+            fetch("http://localhost:8080/api/members")
+
+                .then(response => response.json())
+
+                .then(members => {
+
+                    fetch("http://localhost:8080/api/skill-offers")
+
+                        .then(response => response.json())
+
+                        .then(skills => {
+
+                            const container =
+                                document.getElementById("members-details-list");
+
+                            container.innerHTML = "";
+
+                            members.forEach(member => {
+
+                                const memberSkills =
+                                    skills.filter(
+                                        skill =>
+                                            Number(skill.providerId) === Number(member.id)
+                                    );
+
+                                let skillText = "";
+
+                                if (memberSkills.length === 0) {
+
+                                    skillText = "<div>No skills offered</div>";
+
+                                } else {
+
+                                    skillText = memberSkills.map(skill => {
+
+                                        return `
+                                            <div>
+                                                💡 ${skill.skillName}
+                                            </div>
+                                        `;
+
+                                    }).join("");
+
+                                }
+
+                                container.innerHTML += `
+
+                                    <div class="content-box">
+
+                                        <h3>${member.name}</h3>
+
+                                        <p>
+                                            Email: ${member.email}
+                                        </p>
+
+                                        <p>
+                                            💳 Credits:
+                                            ${member.creditBalance}
+                                        </p>
+
+                                        <br>
+
+                                        <strong>Skills:</strong>
+
+                                        <div style="margin-top: 10px;">
+                                            ${skillText}
+                                        </div>
+
+                                    </div>
+
+                                `;
+
+                            });
+
+                        });
+
+                });
+
+        }
+
+        loadMembersDetails();
+
+        function addMemberDetails() {
+
+            let name = prompt("Enter member name:");
+
+            if (name === null || name.trim() === "") {
+                return;
+            }
+
+            let email = prompt("Enter email:");
+
+            if (email === null || email.trim() === "") {
+                return;
+            }
+
+            let credits = prompt("Enter credit balance:");
+
+            if (credits === null || credits.trim() === "") {
+                return;
+            }
+
+            let skills = prompt(
+                "Enter skills separated by commas:\nExample: Java, Python, DBMS"
+            );
+
+            if (skills === null || skills.trim() === "") {
+                return;
+            }
+
+            const skillList = skills
+                .split(",")
+                .map(skill => skill.trim())
+                .filter(skill => skill !== "");
+
+            let skillHTML = skillList.map(skill => {
+
+                return `
+                    <div>
+                        💡 ${skill}
+                    </div>
+                `;
+
+            }).join("");
+
+            const container =
+                document.getElementById("members-details-list");
+
+            container.innerHTML += `
+
+                <div class="content-box">
+
+                    <h3>${name}</h3>
+
+                    <p>
+                        Email: ${email}
+                    </p>
+
+                    <p>
+                        💳 Credits:
+                        ${credits}
+                    </p>
+
+                    <br>
+
+                    <strong>Skills:</strong>
+
+                    <div style="margin-top: 10px;">
+                        ${skillHTML}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
